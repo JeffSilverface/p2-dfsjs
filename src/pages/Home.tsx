@@ -4,8 +4,14 @@ import { PieChart } from "../components/PieChart";
 import { Indicator } from "../components/Indicator";
 
 export const Home: FC = () => {
+  const { totalParticipatingCountries, totalGamesEditions, isLoading } =
+    useData();
+  const centered = "h-screen flex items-center justify-center";
+
+  if (isLoading) return <div className={centered}>Chargement...</div>;
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
+    <div className="p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">
           Historique des Jeux Olympiques - TéléSport
@@ -18,16 +24,12 @@ export const Home: FC = () => {
           </p>
         </div>
 
-        {/* Anti-pattern 8 — Cartes dupliquées — extraire en composant réutilisable (Indicator.tsx). */}
-        <div className="mb-2">
+        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           <Indicator
             title="Pays participants"
-            value={useData().totalParticipatingCountries}
+            value={totalParticipatingCountries}
           />
-          <Indicator
-            title="Éditions des JO"
-            value={useData().totalGamesEditions}
-          />
+          <Indicator title="Éditions des JO" value={totalGamesEditions} />
         </div>
 
         <div className="bg-gray-800 p-8 rounded-lg shadow-xl">

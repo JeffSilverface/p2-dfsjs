@@ -10,3 +10,8 @@ export interface Olympic {
   countryName: string;
   participations: Participation[];
 }
+
+export interface IndicatorProps {
+  title: string;
+  value: number;
+}

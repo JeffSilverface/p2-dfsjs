@@ -4,10 +4,12 @@ import type { Olympic } from "../models/olympicDataTypes";
 
 export const useData = () => {
   const [data, setData] = useState<Olympic[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setData(olympicsData);
+      setIsLoading(false);
     }, 500);
   }, []);
 
@@ -18,5 +20,6 @@ export const useData = () => {
     data,
     totalParticipatingCountries,
     totalGamesEditions,
+    isLoading,
   };
 };

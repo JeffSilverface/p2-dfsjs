@@ -1,4 +1,4 @@
-import type { IndicatorProps } from "../models/props";
+import type { IndicatorProps } from "../models/olympicDataTypes";
 
 export const Indicator = ({ title, value }: IndicatorProps) => {
   return (

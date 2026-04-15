@@ -1,8 +1,21 @@
 import { Pie } from "react-chartjs-2";
+import { useNavigate } from "react-router-dom";
 import { useData } from "../hooks/useData";
 import type { Olympic, Participation } from "../models/olympicDataTypes";
+import type { ActiveElement, ChartEvent } from "chart.js";
 
 export const PieChart = () => {
+  const { data } = useData();
+  const navigate = useNavigate();
+
+  const handleClick = (_event: ChartEvent, elements: ActiveElement[]) => {
+    if (elements.length > 0) {
+      const index = elements[0].index;
+      const country = data?.[index];
+      if (country) navigate(`/country/${country.id}`);
+    }
+  };
+
   const calculateTotalMedals = (country: Olympic) => {
     return country.participations.reduce(
       (sum: number, p: Participation) => sum + p.medalsCount,
@@ -11,11 +24,11 @@ export const PieChart = () => {
   };
 
   const chartData = {
-    labels: useData().data?.map((d: Olympic) => d.countryName),
+    labels: data?.map((d: Olympic) => d.countryName),
     datasets: [
       {
         label: "Total des médailles",
-        data: useData().data?.map((d: Olympic) => calculateTotalMedals(d)),
+        data: data?.map((d: Olympic) => calculateTotalMedals(d)),
         backgroundColor: [
           "rgba(255, 99, 132, 0.6)",
           "rgba(54, 162, 235, 0.6)",
@@ -38,6 +51,7 @@ export const PieChart = () => {
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    onClick: handleClick,
     plugins: {
       legend: {
         position: "bottom" as const,
@@ -49,7 +63,7 @@ export const PieChart = () => {
   };
 
   return (
-    <div style={{ height: "400px" }}>
+    <div style={{ height: "400px", cursor: "pointer" }}>
       <Pie data={chartData} options={chartOptions} />
     </div>
   );

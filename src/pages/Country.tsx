@@ -1,18 +1,25 @@
 import type { FC } from "react";
-import { useParams } from "react-router-dom";
-import { olympicsData } from "../data/olympicsData.json";
+import { useParams, Link } from "react-router-dom";
 import type { Olympic, Participation } from "../models/olympicDataTypes";
 import { LineChart } from "../components/LineChart";
 import { Indicator } from "../components/Indicator";
+import { useData } from "../hooks/useData";
 
 export const Country: FC = () => {
   const { id } = useParams();
+  const { data, isLoading } = useData();
 
-  const country: Olympic | undefined = olympicsData.find(
+  const centered = "h-screen flex items-center justify-center";
+
+  if (isLoading) return <div className={centered}>Chargement...</div>;
+
+  const country: Olympic | undefined = data?.find(
     (c: Olympic) => c.id === Number(id),
   );
 
-  const totalMedals = country?.participations.reduce(
+  if (!country) return <div className={centered}>Pays introuvable.</div>;
+
+  const totalMedals = country.participations.reduce(
     (sum: number, p: Participation) => sum + p.medalsCount,
     0,
   );
@@ -23,22 +30,24 @@ export const Country: FC = () => {
   const totalParticipations = country?.participations.length;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
+    <div className="p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">{country?.countryName}</h1>
-
-        <div className="mb-2">
+        <div className="flex flex-row align-items-center mb-8">
+          <Link to="/" className="text-3xl me-4">
+            {"<-"}
+          </Link>
+          <h1 className="text-4xl font-bold ">{country?.countryName}</h1>
+        </div>
+        <div className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
           <Indicator title="Participations" value={totalParticipations ?? 0} />
           <Indicator title="Total médailles" value={totalMedals ?? 0} />
           <Indicator title="Total athlètes" value={totalAthletes ?? 0} />
         </div>
-
         <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
           <div style={{ height: "400px" }}>
             <LineChart selectedCountry={country} />
           </div>
         </div>
-
         <div className="text-sm text-gray-400">
           <p>Données des 5 dernières éditions des Jeux Olympiques</p>
         </div>
