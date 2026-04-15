@@ -28,13 +28,14 @@
 src/
 ├── components/
 │   ├── Chart.tsx
+│   ├── Pie.tsx
 │   ├── Indicator.tsx
 │   └── Layout.tsx
 ├── pages/
 │   ├── Home.tsx
 │   └── Country.tsx
 ├── hooks/
-│   └── useOlympicData.ts
+│   └── useData.ts
 ├── data/
 │   └── olympicData.json
 ├── models/
