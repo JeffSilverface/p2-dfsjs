@@ -21,3 +21,25 @@
 - **UseEffect** - il y a un useEffect avec une temporisation qui semble simuler un fetch, je pense que c'est pour l'exercice
 
 - **DRY not WET** - On éviter de copier coller du code pour afficher plusieurs fois la même chose on créé un composant et une boucle avec des paramêtres
+
+## Nouvelle architecture
+
+```
+src/
+├── components/
+│   ├── Chart.tsx
+│   ├── Indicator.tsx
+│   └── Layout.tsx
+├── pages/
+│   ├── Home.tsx
+│   └── Country.tsx
+├── hooks/
+│   └── useOlympicData.ts
+├── data/
+│   └── olympicData.json
+├── models/
+│   └── olympicDataTypes.ts
+└── router.tsx
+```
+
+
