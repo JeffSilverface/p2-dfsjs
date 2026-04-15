@@ -27,8 +27,8 @@
 ```
 src/
 ├── components/
-│   ├── Chart.tsx
-│   ├── Pie.tsx
+│   ├── LineChart.tsx
+│   ├── PieChart.tsx
 │   ├── Indicator.tsx
 │   └── Layout.tsx
 ├── pages/
@@ -42,5 +42,3 @@ src/
 │   └── olympicDataTypes.ts
 └── router.tsx
 ```
-
-

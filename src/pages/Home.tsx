@@ -1,72 +1,9 @@
-import { useEffect, useState, type FC } from "react";
-import { Pie } from "react-chartjs-2";
-import { olympicsData } from "../data/olympicsData.json";
-import type { Olympic, Participation } from "../models/olympicDataTypes";
+import { type FC } from "react";
+import { useData } from "../hooks/useData";
+import { PieChart } from "../components/PieChart";
+import { Indicator } from "../components/Indicator";
 
 export const Home: FC = () => {
-  // Anti-pattern 3 — Utilisation de `any` — typer pour garder les bénéfices TypeScript.
-  const [data, setData] = useState<Olympic[] | null>(null);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setData(olympicsData);
-    }, 500);
-  }, []);
-
-  // Anti-pattern 6 — Logique métier complexe directement dans le composant
-  const calculateTotalMedals = (country: Olympic) => {
-    return country.participations.reduce(
-      (sum: number, p: Participation) => sum + p.medalsCount,
-      0,
-    );
-  };
-
-  const totalParticipatingCountries = data ? data.length : 0;
-  const totalGamesEditions = 5;
-
-  // Anti-pattern 7 — État de chargement dérivé des données au lieu d'un état dédié (loading/error).
-  if (!data) {
-    return <div>Chargement...</div>;
-  }
-
-  const chartData = {
-    labels: data.map((d: Olympic) => d.countryName),
-    datasets: [
-      {
-        label: "Total des médailles",
-        data: data.map((d: Olympic) => calculateTotalMedals(d)),
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-          "rgba(255, 206, 86, 0.6)",
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(153, 102, 255, 0.6)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "bottom" as const,
-        labels: {
-          color: "white",
-        },
-      },
-    },
-  };
-
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <div className="max-w-6xl mx-auto">
@@ -83,24 +20,18 @@ export const Home: FC = () => {
 
         {/* Anti-pattern 8 — Cartes dupliquées — extraire en composant réutilisable (Indicator.tsx). */}
         <div className="mb-2">
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center mb-2">
-            <h3 className="text-xl font-semibold mb-2">Pays participants</h3>
-            <p className="text-4xl font-bold text-blue-400">
-              {totalParticipatingCountries}
-            </p>
-          </div>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-            <h3 className="text-xl font-semibold mb-2">Éditions des JO</h3>
-            <p className="text-4xl font-bold text-green-400">
-              {totalGamesEditions}
-            </p>
-          </div>
+          <Indicator
+            title="Pays participants"
+            value={useData().totalParticipatingCountries}
+          />
+          <Indicator
+            title="Éditions des JO"
+            value={useData().totalGamesEditions}
+          />
         </div>
 
         <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
-          <div style={{ height: "400px" }}>
-            <Pie data={chartData} options={chartOptions} />
-          </div>
+          <PieChart />
         </div>
 
         <div className="text-sm text-gray-400">
