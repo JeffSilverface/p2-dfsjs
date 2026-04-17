@@ -1,122 +1,92 @@
-# TéléSport - Olympic Games History Dashboard
+# TéléSport — Olympic Games History Dashboard
 
-Interactive web application to visualize historical performance data of countries in the Olympic Games.
+Application web interactive pour visualiser les performances historiques des pays aux Jeux Olympiques.
 
-## 🚀 Features
+## Installation
 
-- **Interactive Dashboard**: View medal counts by country with interactive charts
-- **Country Details**: Explore detailed statistics for each participating country
-- **Data Visualization**: Interactive charts powered by Chart.js
-- **Responsive Design**: Optimized for desktop and mobile devices
-- **Modern Stack**: Built with React 19, TypeScript, and Tailwind CSS
+### Prérequis
 
-## 📋 Prerequisites
+- **Node.js** 22 LTS ou supérieur
+- **npm** (inclus avec Node.js)
 
-- **Node.js** 22 LTS or higher
-- **npm** (included with Node.js)
-
-## 🛠️ Installation
-
-Clone the repository:
+### Démarrage
 
 ```bash
-git clone https://github.com/openclassrooms/p2-dfsjs.git
+git clone https://github.com/JeffSilverface/p2-dfsjs
 cd p2-dfsjs
-```
-
-Install dependencies:
-
-```bash
 npm install
-```
-
-## 🎯 Usage
-
-### Development Server
-
-Start the development server:
-
-```bash
 npm run dev
 ```
 
-The application will be available at [http://localhost:5173](http://localhost:5173)
+L'application est accessible sur http://localhost:5173
 
-### Production Build
-
-Build the application for production:
+### Autres commandes
 
 ```bash
-npm run build
+npm run build    # Build de production
+npm run preview  # Prévisualisation du build
+npm run lint     # Vérification du code
 ```
-
-### Linting
-
-Run the linter to check code quality:
-
-```bash
-npm run lint
-```
-
-## 📁 Project Structure
-
-```
-p2-dfsjs/
-├── public/              # Static public assets
-├── src/
-│   ├── App.tsx         # Main application component
-│   ├── main.tsx        # React entry point
-│   └── index.css       # Global styles
-├── index.html          # Main HTML page
-├── package.json        # Project dependencies
-├── tsconfig.json       # TypeScript configuration
-├── vite.config.ts      # Vite configuration
-├── tailwind.config.js  # Tailwind CSS configuration
-└── .eslintrc.cjs       # ESLint configuration
-```
-
-## 🔧 Tech Stack
-
-- **React 19** - UI library with latest features
-- **TypeScript** - Static type checking
-- **Vite 5** - Fast build tool and dev server
-- **Tailwind CSS 4** - Utility-first CSS framework
-- **React Router 6** - Client-side routing
-- **Chart.js** - Interactive data visualization
-- **ESLint** - Code quality and consistency
-
-## 📊 Data
-
-The application currently uses mock data to simulate Olympic Games statistics. This architecture is designed to facilitate future integration with a REST API backend.
-
-## 🎨 Design
-
-The application features:
-
-- Clean, modern interface optimized for data visualization
-- Responsive layout adapting to all screen sizes
-- Interactive charts with hover effects
-- Smooth navigation between pages
-
-## 📚 Documentation
-
-For more information on the technologies used:
-
-- [React Documentation](https://react.dev)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Vite Guide](https://vitejs.dev)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [React Router Documentation](https://reactrouter.com)
-- [Chart.js Documentation](https://www.chartjs.org/docs/latest/)
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📝 License
-
-This project is available for educational and personal use.
 
 ---
 
-**Built with React 19 + TypeScript + Vite + Tailwind CSS**
+## Structure du projet
+
+```
+p2-dfsjs/
+├── public/
+├── src/
+│   ├── data/
+│   │   └── olympicsData.json       # Données statiques (pays, participations, médailles)
+│   ├── models/
+│   │   └── olympicDataTypes.ts     # Interfaces TypeScript (Olympic, Participation, IndicatorProps)
+│   ├── hooks/
+│   │   └── useData.ts              # Hook custom — chargement et agrégation des données
+│   ├── components/
+│   │   ├── HeaderComponent.tsx     # En-tête responsive (titre adapté mobile/desktop)
+│   │   ├── Layout.tsx              # Structure commune (header + <Outlet />)
+│   │   ├── Indicator.tsx           # Carte de statistique (titre + valeur)
+│   │   ├── LineChart.tsx           # Graphique linéaire (médailles par édition)
+│   │   └── PieChart.tsx            # Graphique circulaire (répartition des médailles)
+│   ├── pages/
+│   │   ├── DashboardPage.tsx       # Page d'accueil — vue globale tous pays
+│   │   ├── CountryDetailPage.tsx   # Page détail d'un pays (/country/:id)
+│   │   └── NotFound404.tsx         # Page 404
+│   ├── Router.tsx                  # Définition des routes (React Router v6)
+│   ├── App.tsx                     # Point d'entrée — enregistrement Chart.js + Router
+│   └── main.tsx                    # Montage React
+├── index.html
+├── vite.config.ts
+├── tsconfig.json
+└── package.json
+```
+
+### Pages et routing
+
+| Route | Page | Description |
+|-----------------------|---------------------|----------------------------------------------------------------------|
+| `/`                   | `DashboardPage`     | Vue d'ensemble : indicateurs globaux + graphique circulaire par pays |
+| `/country/:id`        | `CountryDetailPage` | Détail d'un pays : médailles et athlètes par édition                 |
+| `*`                   | `NotFound404`       | Page 404 classique                                                   |
+
+---
+
+## Choix techniques
+
+### React 19 + TypeScript
+Typage strict de toutes les données métier via les interfaces.
+
+### Vite 7
+Utilisé comme bundler et serveur de développement pour sa rapidité (HMR natif, build ESM).
+
+### Tailwind CSS 4
+Configuration via le plugin Vite (`@tailwindcss/vite`). Le responsive est géré avec les préfixes utilitaires (`md:`, `hidden md:inline`) directement dans les composants, sans fichier de configuration séparé.
+
+### React Router v6
+Routing déclaratif avec un `Layout` parent commun (pattern `<Outlet />`). Les flags de migration v7 (`v7_startTransition`, `v7_relativeSplatPath`) sont activés pour anticiper la prochaine version majeure.
+
+### Chart.js + react-chartjs-2
+Seuls les modules Chart.js nécessaires sont enregistrés manuellement dans `App.tsx` (tree-shaking). Les composants `LineChart` et `PieChart` encapsulent les graphiques `react-chartjs-2` pour les rendre réutilisables.
+
+### Hook `useData`
+Simule un appel API asynchrone (délai de 500 ms) pour reproduire le comportement d'une future intégration REST. Expose les données brutes ainsi que des indicateurs agrégés (`totalParticipatingCountries`, `totalGamesEditions`). L'architecture permet de remplacer l'import JSON par un `fetch` sans modifier les composants consommateurs.
