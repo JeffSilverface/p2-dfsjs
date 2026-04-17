@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import { Home } from "./pages/Home";
-import { Country } from "./pages/Country";
+import { DashboardPage } from "./pages/DashboardPage";
+import { CountryDetailPage } from "./pages/CountryDetailPage";
 import { NotFound404 } from "./pages/NotFound404";
 
 export const Router = () => {
@@ -13,8 +13,8 @@ export const Router = () => {
         {/* Route parente : affiche le Layout */}
         <Route element={<Layout />}>
           {/* Routes enfants : s'affichent dans le <Outlet /> du Layout */}
-          <Route path="/" element={<Home />} />
-          <Route path="/country/:id" element={<Country />} />
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/country/:id" element={<CountryDetailPage />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>

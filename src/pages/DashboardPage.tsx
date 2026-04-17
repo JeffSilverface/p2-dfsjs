@@ -3,7 +3,7 @@ import { useData } from "../hooks/useData";
 import { PieChart } from "../components/PieChart";
 import { Indicator } from "../components/Indicator";
 
-export const Home: FC = () => {
+export const DashboardPage: FC = () => {
   const { totalParticipatingCountries, totalGamesEditions, isLoading } =
     useData();
   const centered = "h-screen flex items-center justify-center";
@@ -13,9 +13,7 @@ export const Home: FC = () => {
   return (
     <div className="p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl md:text-4xl font-bold mb-8">
-          Historique des Jeux Olympiques - TéléSport
-        </h1>
+     
 
         <div className="mb-8">
           <p className="text-lg">

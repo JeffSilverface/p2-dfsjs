@@ -5,7 +5,7 @@ import { LineChart } from "../components/LineChart";
 import { Indicator } from "../components/Indicator";
 import { useData } from "../hooks/useData";
 
-export const Country: FC = () => {
+export const CountryDetailPage: FC = () => {
   const { id } = useParams();
   const { data, isLoading } = useData();
 

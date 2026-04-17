@@ -32,7 +32,7 @@ src/
 │   ├── Indicator.tsx
 │   └── Layout.tsx
 ├── pages/
-│   ├── Home.tsx
+│   ├── DashboardPage.tsx
 │   └── Country.tsx
 ├── hooks/
 │   └── useData.ts

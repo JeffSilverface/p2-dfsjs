@@ -10,8 +10,8 @@ src/
 │   ├── LineChart.tsx       ← composant dumb
 │   └── PieChart.tsx        ← composant smart
 ├── pages/
-│   ├── Home.tsx            ← page d'accueil
-│   └── Country.tsx         ← page de détail
+│   ├── DashboardPage.tsx            ← page d'accueil
+│   └── CountryDetailPage.tsx        ← page de détail
 ├── hooks/
 │   └── useData.ts          ← custom hook de gestion des données
 ├── data/
@@ -44,10 +44,10 @@ Ces composants ne gèrent aucune logique métier. Ils reçoivent des données vi
 
 ### Pages
 
-| Page      | Route          | Rôle                                                               |
-| --------- | -------------- | ------------------------------------------------------------------ |
-| `Home`    | `/`            | Vue globale : indicateurs généraux + graphique circulaire par pays |
-| `Country` | `/country/:id` | Vue détaillée d'un pays : indicateurs + évolution des médailles    |
+| Page                   | Route          | Rôle                                                               |
+| ---------------------- | -------------- | ------------------------------------------------------------------ |
+| `DashboardPage`        | `/`            | Vue globale : indicateurs généraux + graphique circulaire par pays |
+| `CountryDetailPage`    | `/country/:id` | Vue détaillée d'un pays : indicateurs + évolution des médailles    |
 
 ---
 
@@ -58,8 +58,8 @@ Le routeur est dans `router.tsx`. Il utilise `Layout` comme route parente, ce qu
 ```
 Layout
 └── <Outlet />
-    ├── /              → Home
-    └── /country/:id  → Country
+    ├── /              → DashboardPage
+    └── /country/:id  → CountryDetailPage
 ```
 
 ---
