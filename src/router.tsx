@@ -5,7 +5,7 @@ import { Country } from "./pages/Country";
 
 export const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
         {/* Route parente : affiche le Layout */}
         <Route element={<Layout />}>
