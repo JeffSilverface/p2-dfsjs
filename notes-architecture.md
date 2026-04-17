@@ -40,5 +40,5 @@ src/
 │   └── olympicData.json
 ├── models/
 │   └── olympicDataTypes.ts
-└── router.tsx
+└── Router.tsx
 ```

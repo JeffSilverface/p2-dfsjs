@@ -10,7 +10,7 @@ import {
   LineElement,
   PointElement,
 } from "chart.js";
-import { Router } from "./router";
+import { Router } from "./Router";
 
 ChartJS.register(
   ArcElement,
