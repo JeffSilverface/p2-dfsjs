@@ -1,7 +1,6 @@
-import type { FC } from "react";
 import { Link } from "react-router-dom";
 
-export const NotFound404: FC = () => {
+export const NotFound404 = () => {
   return (
     <div className="h-screen flex items-center justify-center flex-col gap-6">
       <span className="text-2xl">Page non trouvée. 404</span>

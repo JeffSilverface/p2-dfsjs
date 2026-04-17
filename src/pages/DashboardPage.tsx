@@ -1,9 +1,8 @@
-import { type FC } from "react";
 import { useData } from "../hooks/useData";
 import { PieChart } from "../components/PieChart";
 import { Indicator } from "../components/Indicator";
 
-export const DashboardPage: FC = () => {
+export const DashboardPage = () => {
   const { totalParticipatingCountries, totalGamesEditions, isLoading } =
     useData();
   const centered = "h-screen flex items-center justify-center";
@@ -13,8 +12,6 @@ export const DashboardPage: FC = () => {
   return (
     <div className="p-8">
       <div className="max-w-6xl mx-auto">
-     
-
         <div className="mb-8">
           <p className="text-lg">
             Bienvenue sur la page dédiée à l'historique des Jeux Olympiques.

@@ -1,11 +1,10 @@
-import type { FC } from "react";
 import { useParams, Link } from "react-router-dom";
 import type { Olympic, Participation } from "../models/olympicDataTypes";
 import { LineChart } from "../components/LineChart";
 import { Indicator } from "../components/Indicator";
 import { useData } from "../hooks/useData";
 
-export const CountryDetailPage: FC = () => {
+export const CountryDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading } = useData();
 
