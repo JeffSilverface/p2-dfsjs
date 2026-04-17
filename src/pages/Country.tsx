@@ -32,11 +32,13 @@ export const Country: FC = () => {
   return (
     <div className="p-8">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-row align-items-center mb-8">
+        <div className="flex flex-row items-center mb-8">
           <Link to="/" className="text-3xl me-4">
             {"<-"}
           </Link>
-          <h1 className="text-4xl font-bold ">{country?.countryName}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold ">
+            {country?.countryName}
+          </h1>
         </div>
         <div className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
           <Indicator title="Participations" value={totalParticipations ?? 0} />

@@ -13,7 +13,7 @@ export const Home: FC = () => {
   return (
     <div className="p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">
+        <h1 className="text-2xl md:text-4xl font-bold mb-8">
           Historique des Jeux Olympiques - TéléSport
         </h1>
 
