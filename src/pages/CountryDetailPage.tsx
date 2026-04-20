@@ -3,12 +3,11 @@ import type { Olympic, Participation } from "../models/olympicDataTypes";
 import { LineChart } from "../components/LineChart";
 import { Indicator } from "../components/Indicator";
 import { useData } from "../hooks/useData";
+import { centered } from "../styles/constants";
 
 export const CountryDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading } = useData();
-
-  const centered = "h-screen flex items-center justify-center";
 
   if (isLoading) return <div className={centered}>Chargement...</div>;
 

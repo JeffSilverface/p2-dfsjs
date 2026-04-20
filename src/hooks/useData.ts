@@ -3,7 +3,7 @@ import { olympicsData } from "../data/olympicsData.json";
 import type { Olympic } from "../models/olympicDataTypes";
 
 export const useData = () => {
-  const [data, setData] = useState<Olympic[] | null>(null);
+  const [data, setData] = useState<Olympic[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -14,7 +14,10 @@ export const useData = () => {
   }, []);
 
   const totalParticipatingCountries = data ? data.length : 0;
-  const totalGamesEditions = 5;
+  const totalGamesEditions = data.reduce((years, country) => {
+    country.participations.forEach((p) => years.add(p.year));
+    return years;
+  }, new Set<number>()).size;
 
   return {
     data,

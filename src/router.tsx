@@ -10,9 +10,7 @@ export const Router = () => {
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
     >
       <Routes>
-        {/* Route parente : affiche le Layout */}
         <Route element={<Layout />}>
-          {/* Routes enfants : s'affichent dans le <Outlet /> du Layout */}
           <Route path="/" element={<DashboardPage />} />
           <Route path="/country/:id" element={<CountryDetailPage />} />
           <Route path="*" element={<NotFound404 />} />

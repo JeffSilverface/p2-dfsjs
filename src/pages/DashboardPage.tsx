@@ -1,11 +1,11 @@
 import { useData } from "../hooks/useData";
 import { PieChart } from "../components/PieChart";
 import { Indicator } from "../components/Indicator";
+import { centered } from "../styles/constants";
 
 export const DashboardPage = () => {
   const { totalParticipatingCountries, totalGamesEditions, isLoading } =
     useData();
-  const centered = "h-screen flex items-center justify-center";
 
   if (isLoading) return <div className={centered}>Chargement...</div>;
 
